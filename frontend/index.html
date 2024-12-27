@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kakuro Helper</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Kakuro Helper</h1>
+        <button id="themeToggle">Switch to Dark Mode</button> <!-- Toggle Button -->
+        <form id="kakuroForm">
+            <label for="sum_value">Sum Value:</label>
+            <input type="number" id="sum_value" name="sum_value" required>
+
+            <label for="length">Length of Partitions:</label>
+            <input type="number" id="length" name="length" required>
+
+            <label for="inclusion_numbers">Inclusion Numbers (comma-separated):</label>
+            <input type="text" id="inclusion_numbers" name="inclusion_numbers" placeholder="e.g., 1,2">
+
+            <label for="exclusion_numbers">Exclusion Numbers (comma-separated):</label>
+            <input type="text" id="exclusion_numbers" name="exclusion_numbers" placeholder="e.g., 3,4">
+
+            <button type="submit">Get Combinations</button>
+        </form>
+
+        <div class="result">
+            <h2>Results:</h2>
+            <pre id="result"></pre>
+            <p class="error" id="error"></p>
+        </div>
+    </div>
+
+<!-- Link to the external JavaScript file -->
+<script src="app.js"></script>
+</body>
+</html>
