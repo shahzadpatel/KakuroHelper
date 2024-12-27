@@ -28,7 +28,7 @@ Kakuro Helper is a simple web application designed to assist Kakuro puzzle enthu
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/kakuro-helper.git
+   git clone https://github.com/shahzadpatel/KakuroHelper
    cd KakuroHelper/root/backend
    ```
 2. Execute the below command in the above location
@@ -70,7 +70,7 @@ Kakuro Helper is a simple web application designed to assist Kakuro puzzle enthu
 ## Author
 
 - **Your Name**  
-  GitHub: [@your-username](https://github.com/your-username)
+  GitHub: [Shahzad Patel](https://github.com/shahzadpatel)
 
 ---
 
