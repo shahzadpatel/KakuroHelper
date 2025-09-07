@@ -67,9 +67,7 @@ Kakuro Helper is a simple web application designed to assist Kakuro puzzle enthu
 
 ## Future Enhancements
 
-- Add support for multiple themes.
 - Reduce the API calls by sending all available combinations to the frontend and filter the exclusion/inclusion numbers without making API calls for them
-- Enhance the UI
 - Make the application into a mobile app
 
 ---
