@@ -31,7 +31,13 @@ Kakuro Helper is a simple web application designed to assist Kakuro puzzle enthu
    git clone https://github.com/shahzadpatel/KakuroHelper
    cd KakuroHelper/root/backend
    ```
-2. Execute the below command in the above location
+2. Execute the below command in the above location: 
+   
+   **Note:** In some scenarios, you may need to run the application from a virtual environemnt. If so, first activate the environemnt using:
+   ```bash
+   source venv/bin/activate
+   ```
+   Then run:
    ```bash
    python3 app.py
    ```
