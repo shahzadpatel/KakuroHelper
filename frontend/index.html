@@ -26,9 +26,16 @@
             <button type="submit">Get Combinations</button>
         </form>
 
-        <div class="result">
-            <h2>Results:</h2>
-            <pre id="result"></pre>
+         <div class="result">
+            <h2 id="resultsHeading">Results</h2>
+
+            <!-- Meta info about current search -->
+            <div id="resultMeta" class="result-meta"></div>
+
+            <!-- Grid of results -->
+            <div id="resultGrid" class="result-grid"></div>
+
+            <!-- Error message -->
             <p class="error" id="error"></p>
         </div>
     </div>

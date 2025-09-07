@@ -1,7 +1,9 @@
 const form = document.getElementById('kakuroForm');
-const resultDiv = document.getElementById('result');
+const resultGrid = document.getElementById('resultGrid');
+const resultMeta = document.getElementById('resultMeta');
 const errorDiv = document.getElementById('error');
 const themeToggle = document.getElementById('themeToggle');
+const resultsHeading = document.getElementById('resultsHeading');
 
 // Function to toggle themes
 themeToggle.addEventListener('click', () => {
@@ -26,8 +28,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    resultDiv.textContent = '';
+    resultGrid.innerHTML = '';
+    resultMeta.textContent = '';
     errorDiv.textContent = '';
+    resultsHeading.textContent = 'Result';
 
     const sumValue = document.getElementById('sum_value').value;
     const length = document.getElementById('length').value;
@@ -57,34 +61,45 @@ form.addEventListener('submit', async (e) => {
 
         if (!response.ok) {
             const error = await response.json();
-            errorDiv.textContent = error.error || 'No Combinations Possible!!! :((';
+            errorDiv.textContent = error.error || 'Server Error 🛑';
             return;
         }
 
         const data = await response.json();
-        // resultDiv.textContent = JSON.stringify(data, null, 2);
+
+        // Build meta info
+        const inclusionText = inclusionNumbers.length > 0 ? inclusionNumbers.join(', ') : 'NONE';
+        const exclusionText = exclusionNumbers.length > 0 ? exclusionNumbers.join(', ') : 'NONE';
+        resultMeta.innerHTML = `
+            <p><strong>Sum:</strong> ${sumValue}</p>
+            <p><strong>Split:</strong> ${length} ways</p>
+            <p><strong>Including:</strong> ${inclusionText}</p>
+            <p><strong>Excluding:</strong> ${exclusionText}</p>
+            <p><strong>Total combinations:</strong> ${data.partitions?.length || 0}</p>
+        `;
+
+        // Populate result grid
         if (data.partitions && Array.isArray(data.partitions)) {
-            const formattedPartitions = data.partitions.map(partitionObj => {
-                // Check if highlighting metadata exists
+            resultGrid.innerHTML = data.partitions.map(partitionObj => {
                 if (partitionObj.combination && partitionObj.highlighted) {
-                    return partitionObj.combination
-                        .map((num, idx) => 
-                            partitionObj.highlighted[idx] 
-                                ? `<span style="color: red; font-weight: bold;">${num}</span>` 
-                                : num
-                        ).join(' + ');
+                    return `
+                        <div class="result-item">
+                            ${partitionObj.combination.map((num, idx) =>
+                                partitionObj.highlighted[idx]
+                                    ? `<span style="color: red; font-weight: bold;">${num}</span>`
+                                    : num
+                            ).join(' + ')}
+                        </div>
+                    `;
                 } else if (Array.isArray(partitionObj)) {
-                    // Fallback for cases without metadata
-                    return partitionObj.join(' + ');
+                    return `<div class="result-item">${partitionObj.join(' + ')}</div>`;
                 }
-            });
-            
-            resultDiv.innerHTML = formattedPartitions.join('<br>'); // Use innerHTML for rich formatting
+            }).join('');
         } else {
-            resultDiv.textContent = 'No partitions found!!! :(((';
+            resultGrid.innerHTML = '<p>⚠️ No Combinations Possible... ☹️</p>';
         }
 
     } catch (err) {
-        errorDiv.textContent = 'Failed to connect to the server.';
+        errorDiv.textContent = 'Failed to connect to the server....';
     }
 });

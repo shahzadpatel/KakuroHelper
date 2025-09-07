@@ -51,9 +51,5 @@ def get_combinations():
         "partitions": highlighted_combinations
     })
 
-# things to work on further:
-# try to make it into a mobile app
-# update the README.md file
-
 if __name__ == "__main__":
     app.run(debug=True)
